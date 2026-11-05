@@ -5,84 +5,107 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mylibrary: study guides, flashcards and tests from your own PDFs</title>
 <meta name="description" content="Drop in your PDFs. Mylibrary builds study guides, flashcards and tests from your own pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fffdf9;--surface:#f5eee3;--ink:#2b1a0f;--muted:#6f5638;--line:#dccdb4;--accent:#8a5a0c;--on-accent:#fffdf9;--deep:#2b1a0f;--deep-ink:#f5e9d0;--gold:#d9a441;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;color-scheme:dark}
-html{background:var(--bg);scroll-padding-top:70px;scroll-behavior:smooth}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.w{max-width:1000px;margin:0 auto;padding:0 20px}
-h1,h2,h3,.mark,.price{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.1;margin:0}
-h1{font-size:clamp(2.4rem,9vw,4.2rem);letter-spacing:-.02em;font-weight:700}
-h2{font-size:clamp(1.8rem,6vw,2.6rem);margin-bottom:20px;font-weight:700}
-h3{font-size:1.2rem}
+:root{--bg:#fffdf9;--surface:#f5eee3;--ink:#2b1a0f;--muted:#6f5638;--line:#dccdb4;--accent:#8a5a0c;--on-accent:#fffdf9;--deep:#2b1a0f;--deep-ink:#f5e9d0;--gold:#d9a441;--card:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;--card:#3a2514;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;--card:#3a2514;color-scheme:dark}
+html{background:var(--bg);scroll-padding-top:72px;scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.6 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:800;line-height:1.08;margin:0;letter-spacing:-.025em}
+h1{font-size:clamp(2.1rem,7.5vw,3.9rem)}
+h2{font-size:clamp(1.7rem,5.5vw,2.6rem);margin-bottom:12px}
+h3{font-size:1.15rem;letter-spacing:-.01em}
 p{margin:0 0 12px}
 a{color:inherit}
-.btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:16px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem;box-shadow:0 5px 0 rgba(0,0,0,.25);transition:transform .12s,box-shadow .12s}
-.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
-.btn:focus-visible,a:focus-visible,summary:focus-visible,.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.sub{color:var(--muted);font-size:1.05rem;max-width:34em}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:16px 28px;border-radius:14px;font-weight:800;text-decoration:none;font-size:1.05rem;box-shadow:0 5px 0 rgba(0,0,0,.28);transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.28)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-header .w{display:flex;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
-.mark{font-weight:700;font-size:1.35rem;text-decoration:none}
-nav{display:flex;gap:16px;align-items:center;font-size:.95rem}
+header .w{display:flex;align-items:center;justify-content:space-between;padding-top:11px;padding-bottom:11px}
+.mark{font-weight:800;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em}
+nav{display:flex;gap:18px;align-items:center;font-size:.95rem;font-weight:700}
 nav a{text-decoration:none;color:var(--muted)}
-nav .btn{padding:9px 16px;font-size:.95rem;color:var(--on-accent);box-shadow:none}
+nav .btn{padding:9px 16px;font-size:.92rem;color:var(--on-accent);box-shadow:none;border-radius:10px}
 .nl{display:none}
-@media(min-width:640px){.nl{display:inline}}
-.hero{background:var(--surface);padding:40px 0 0;overflow:hidden}
-.hero .lead{font-size:1.2rem;color:var(--muted);margin:18px 0 26px;max-width:32em}
-.fine{font-size:.9rem;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.chip{border:1.5px solid var(--line);background:var(--bg);border-radius:99px;padding:8px 15px;font-weight:700;font-size:.92rem;text-decoration:none}
-.chip b{color:var(--accent)}
-.stage{display:grid;gap:26px;align-items:end}
-@media(min-width:820px){.stage{grid-template-columns:1.05fr .95fr;gap:40px}}
-.shelf{display:flex;align-items:flex-end;gap:7px;padding:0 10px;border-bottom:14px solid var(--accent);min-height:280px;margin-top:10px;position:relative}
-.shelf b{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;color:#f5e9d0;font:700 .85rem/1 Georgia,serif;letter-spacing:.03em;border-radius:4px 4px 0 0;box-shadow:inset -5px 0 0 rgba(0,0,0,.2);flex:1;max-width:56px}
-.shelf .lean{transform:rotate(8deg);transform-origin:bottom left;margin-left:12px}
-.card{position:absolute;right:4px;bottom:42px;width:min(58%,240px);height:140px;perspective:700px;cursor:pointer;border:0;background:none;padding:0;font:inherit;transform:rotate(-4deg)}
-.card i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;border-radius:14px;font:700 1.05rem/1.2 Georgia,serif;backface-visibility:hidden;transition:transform .5s;box-shadow:0 12px 28px rgba(43,26,15,.35)}
-.card .f{background:var(--bg);color:var(--ink);border:2px solid var(--accent)}
+@media(min-width:700px){.nl{display:inline}}
+.hero{background:radial-gradient(circle at 80% 20%,rgba(217,164,65,.35),transparent 50%),var(--surface);padding:44px 0 56px}
+.stage{display:grid;gap:36px;align-items:center}
+@media(min-width:860px){.stage{grid-template-columns:1.1fr .9fr;gap:48px}}
+.hero .sub{margin:18px 0 26px;font-size:1.12rem}
+.fine{font-size:.88rem;color:var(--muted)}
+.proof{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.proof span{background:var(--bg);border:1.5px solid var(--line);border-radius:99px;padding:7px 14px;font-weight:700;font-size:.88rem}
+.phone{width:min(290px,100%);margin:0 auto;background:var(--deep);border-radius:38px;padding:10px;box-shadow:0 30px 60px rgba(43,26,15,.35);transform:rotate(2deg)}
+.screen{background:var(--bg);border-radius:30px;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:440px}
+.top{display:flex;justify-content:space-between;font-weight:800;font-size:.9rem}
+.top span:last-child{color:var(--muted);font-weight:700}
+.bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;width:42%;background:var(--accent);border-radius:9px}
+.card{flex:1;min-height:200px;position:relative;perspective:800px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit}
+.card i{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:18px;border-radius:20px;font-style:normal;font-weight:800;font-size:1.2rem;line-height:1.25;backface-visibility:hidden;transition:transform .5s}
+.card i small{font-size:.78rem;font-weight:700;opacity:.7}
+.card .f{background:var(--card);border:2px solid var(--line)}
 .card .k{background:var(--accent);color:var(--on-accent);transform:rotateY(180deg)}
 .card.on .f{transform:rotateY(180deg)}.card.on .k{transform:rotateY(360deg)}
-.hint{font-size:.85rem;color:var(--muted);margin:10px 0 28px}
-.band{padding:60px 0}
-.tiles{display:grid;gap:14px}
-@media(min-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}.tile.wide{grid-column:1/-1}}
-@media(min-width:900px){.tiles{grid-template-columns:repeat(3,1fr)}.tile.wide{grid-column:auto}}
-.tile{background:var(--surface);border-radius:20px;padding:22px;border-top:6px solid var(--accent)}
-.tile p{margin:8px 0 0;color:var(--muted)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acts b{text-align:center;padding:12px;border-radius:12px;font-size:.92rem;background:var(--surface)}
+.acts b:last-child{background:var(--accent);color:var(--on-accent)}
+.tabs{display:flex;justify-content:space-around;font-size:.8rem;font-weight:800;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.tabs .on{color:var(--accent)}
+.hint{text-align:center;font-size:.85rem;color:var(--muted);margin:16px 0 0}
+.band{padding:64px 0}
+.grid{display:grid;gap:16px;margin-top:30px}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.feat{background:var(--surface);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:6px}
+.feat p{color:var(--muted);margin:0 0 14px}
+.mini{margin-top:auto;background:var(--bg);border-radius:16px;padding:14px;font-size:.9rem;display:grid;gap:8px}
+.mini .h{font-weight:800}
+.mini .t{color:var(--muted)}
+.opt{padding:8px 12px;border-radius:10px;border:1.5px solid var(--line)}
+.opt.ok{border-color:var(--accent);background:var(--accent);color:var(--on-accent);font-weight:700}
+.opt.no{border-style:dashed}
+.say{padding:9px 13px;border-radius:14px;max-width:88%}
+.me{background:var(--surface);justify-self:end}
+.ai{background:var(--accent);color:var(--on-accent)}
+.pill{display:inline-block;padding:6px 12px;border-radius:99px;font-weight:700;font-size:.84rem;background:var(--surface);margin-right:6px}
+.files{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.files span{background:var(--surface);border-radius:10px;padding:6px 12px;font-weight:800;font-size:.85rem}
 .deep{background:var(--deep);color:var(--deep-ink)}
-.deep h2{color:var(--deep-ink)}
-ol.steps{padding:0;margin:0 0 26px;list-style:none;counter-reset:s;display:grid;gap:14px}
+.deep .sub{color:#c3a982}
+ol.steps{padding:0;margin:28px 0 26px;list-style:none;counter-reset:s;display:grid;gap:14px}
 @media(min-width:760px){ol.steps{grid-template-columns:repeat(3,1fr)}}
-ol.steps li{counter-increment:s;background:#ffffff12;border-radius:18px;padding:20px 20px 20px 70px;position:relative}
-ol.steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#2b1a0f;font:700 1.15rem/38px Georgia,serif;text-align:center}
+ol.steps li{counter-increment:s;background:#ffffff12;border-radius:20px;padding:20px 20px 20px 68px;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:38px;height:38px;border-radius:12px;background:var(--gold);color:#2b1a0f;font:800 1.1rem/38px "Plus Jakarta Sans",sans-serif;text-align:center}
 ol.steps span{color:#c3a982}
 .deep .btn{background:var(--gold);color:#2b1a0f}
-.warn{background:#ffffff12;border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:16px 18px;margin-top:24px}
+.warn{background:#ffffff12;border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:16px 18px;margin-top:26px}
 .warn p{color:#c3a982}
 .photo{margin-top:12px;border:2px dashed #5a3d24;border-radius:12px;padding:26px 14px;text-align:center;color:#c3a982;font-size:.9rem}
-.plans{display:grid;gap:12px;margin-top:20px;grid-template-columns:1fr}
-@media(min-width:640px){.plans{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:960px){.plans{grid-template-columns:repeat(5,1fr)}}
-.plan{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:18px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center}
-.plan p{color:var(--muted);font-size:.93rem;margin:4px 0 0}
-.price{font-weight:700;font-size:1.7rem;white-space:nowrap}
-@media(min-width:960px){.plan{flex-direction:column;align-items:flex-start;justify-content:flex-start}.price{margin-top:auto;padding-top:12px}}
+.plans{display:grid;gap:12px;margin-top:26px}
+@media(min-width:700px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.plans{grid-template-columns:repeat(5,1fr)}}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:22px;padding:20px;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.plan p{color:var(--muted);font-size:.9rem;margin:4px 0 0}
+.price{font-weight:800;font-size:1.6rem;white-space:nowrap;letter-spacing:-.02em}
+@media(min-width:980px){.plan{flex-direction:column;align-items:flex-start;justify-content:flex-start}.price{margin-top:auto;padding-top:14px}}
 .plan.best{background:var(--accent);color:var(--on-accent);border-color:var(--accent);position:relative}
-.plan.best p{color:inherit;opacity:.9}
-.plan.best::before{content:"Best value";position:absolute;top:-12px;right:16px;background:var(--deep);color:var(--gold);font-weight:700;font-size:.78rem;padding:4px 12px;border-radius:99px}
+.plan.best p{color:inherit;opacity:.92}
+.plan.best::before{content:"Best value";position:absolute;top:-12px;right:16px;background:var(--deep);color:var(--gold);font-weight:800;font-size:.75rem;padding:4px 12px;border-radius:99px}
 .faq{background:var(--surface)}
-details{background:var(--bg);border-radius:14px;padding:15px 18px;margin-bottom:10px}
-summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details{background:var(--bg);border-radius:16px;padding:16px 18px;margin-bottom:10px}
+summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";color:var(--accent);font-size:1.4rem;line-height:1}
 details[open] summary::after{content:"\2212"}
 details p{margin:10px 0 0;color:var(--muted)}
-@media(min-width:900px){.faq .w{display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start}}
-footer{background:var(--deep);color:#c3a982;padding:32px 0 42px;font-size:.95rem}
+@media(min-width:900px){.faq .w{display:grid;grid-template-columns:1fr 1.7fr;gap:48px;align-items:start}}
+.cta{text-align:center;padding:70px 0}
+.cta .sub{margin:12px auto 26px}
+footer{background:var(--deep);color:#c3a982;padding:30px 0 42px;font-size:.92rem}
 footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -90,40 +113,42 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 <body>
 <header><div class="w">
   <a class="mark" href="#top">Mylibrary</a>
-  <nav><a class="nl" href="#install">Install</a><a href="#prices">Prices</a><a class="nl" href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
+  <nav><a class="nl" href="#features">Features</a><a href="#prices">Prices</a><a class="nl" href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
 </div></header>
 
 <main id="top">
 <section class="hero"><div class="w"><div class="stage">
   <div>
     <h1>Turn your PDFs into study guides, flashcards and tests</h1>
-    <p class="lead">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
+    <p class="sub">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
     <a class="btn" data-apk href="#install">Download for Android</a>
-    <p class="fine" style="margin-top:14px">Android only. Free to start.<span data-site="meta"></span></p>
-    <div class="chips"><a class="chip" href="#prices">Free <b>₦0</b></a><a class="chip" href="#prices">From <b>₦865</b> a week</a><a class="chip" href="#prices">See all prices</a></div>
+    <p class="fine" style="margin-top:14px">Free to start.<span data-site="meta"></span></p>
+    <div class="proof"><span>PDF, Word, PowerPoint</span><span>From ₦865 a week</span><span>Pay in the app</span></div>
   </div>
   <div>
-    <div class="shelf">
-      <b style="height:190px;background:#7a4a2b">Pharmacology</b>
-      <b style="height:245px;background:#3f5f4a">Organic Chemistry</b>
-      <b style="height:165px;background:#8a6a1f">Statistics</b>
-      <b class="lean" style="height:220px;background:#7a2f3a">Anatomy</b>
-      <b style="height:200px;background:#4a4f7a">Economics</b>
-      <b style="height:180px;background:#5b4636">Law of Contract</b>
-      <button class="card" type="button" aria-label="Sample flashcard. Tap to flip." onclick="this.classList.toggle('on')"><i class="f">Which organelle makes ATP?</i><i class="k">The mitochondrion</i></button>
-    </div>
-    <p class="hint">Tap the card. Your courses live on a shelf, by semester, with every file inside.</p>
+    <div class="phone"><div class="screen">
+      <div class="top"><span>Pharmacology</span><span>17 / 40</span></div>
+      <div class="bar"><i></i></div>
+      <button class="card" type="button" aria-label="Sample flashcard. Tap to flip." onclick="this.classList.toggle('on')"><i class="f"><small>Tap to flip</small>Which organelle makes ATP?</i><i class="k"><small>Answer</small>The mitochondrion</i></button>
+      <div class="acts"><b>Missed</b><b>Know it</b></div>
+      <div class="tabs"><span>Guide</span><span class="on">Cards</span><span>Test</span><span>Ask</span></div>
+    </div></div>
+    <p class="hint">Tap the card to try it.</p>
   </div>
 </div></div></section>
 
-<section class="band"><div class="w">
-  <h2>What Mylibrary does</h2>
-  <div class="tiles">
-    <div class="tile wide"><h3>Add any file</h3><p>PDF, Word, PowerPoint, text files and pictures, kept by course and semester.</p></div>
-    <div class="tile"><h3>Study guides</h3><p>Your file sorted by topic, in short, simple sentences.</p></div>
-    <div class="tile"><h3>Flashcards</h3><p>Made from the guide. Cards you know come back later. Cards you miss come back today.</p></div>
-    <div class="tile"><h3>Tests</h3><p>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</p></div>
-    <div class="tile wide"><h3>Ask and dictionary</h3><p>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</p></div>
+<section id="features" class="band"><div class="w">
+  <h2>One PDF. Everything you need to revise.</h2>
+  <p class="sub">PDF, Word, PowerPoint, text files and pictures, kept by course and semester.</p>
+  <div class="grid">
+    <div class="feat"><h3>Study guides</h3><p>Your file sorted by topic, in short, simple sentences.</p>
+      <div class="mini"><span class="h">Cell membrane</span><span class="t">It controls what enters and leaves the cell. It is made of two layers of fat.</span></div></div>
+    <div class="feat"><h3>Flashcards</h3><p>Made from the guide. Cards you know come back later. Cards you miss come back today.</p>
+      <div class="mini"><span><span class="pill">Know it</span>back in 5 days</span><span><span class="pill">Missed</span>back today</span></div></div>
+    <div class="feat"><h3>Tests</h3><p>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</p>
+      <div class="mini"><span class="h">Which organelle makes ATP?</span><span class="opt no">Nucleus</span><span class="opt ok">Mitochondrion</span><span class="opt">Ribosome</span></div></div>
+    <div class="feat"><h3>Ask and dictionary</h3><p>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</p>
+      <div class="mini"><span class="say me">What does “efflux” mean?</span><span class="say ai">It means flowing out of a cell.</span></div></div>
   </div>
 </div></section>
 
@@ -143,8 +168,8 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 </div></section>
 
 <section id="prices" class="band"><div class="w">
-  <h2>Prices</h2>
-  <p>Every paid plan lets you build guides and flashcards from 120 pages a week, take one 20-question test a week, and ask 25 questions a week. Reading and reviewing what you already made is always free.</p>
+  <h2>Simple prices</h2>
+  <p class="sub">Every paid plan lets you build guides and flashcards from 120 pages a week, take one 20-question test a week, and ask 25 questions a week. Reading and reviewing what you already made is always free.</p>
   <div class="plans">
     <div class="plan"><div><h3>Free</h3><p>5 courses, 10 questions a week on short files, 2 tests a month. No guides or flashcards.</p></div><span class="price">₦0</span></div>
     <div class="plan"><div><h3>1 week</h3><p>Made for exam week: guides from 200 pages and 30 questions.</p></div><span class="price">₦865</span></div>
@@ -165,6 +190,12 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
   <details><summary>Can I get a refund?</summary><p>The refund rules will be on the Refund policy page before launch.</p></details>
   <details><summary>Which phones work?</summary><p>Android phones only, for now.</p></details>
   </div>
+</div></section>
+
+<section class="cta"><div class="w">
+  <h2>Start with your next PDF</h2>
+  <p class="sub">Free to start. Your first study guide is a few taps away.</p>
+  <a class="btn" data-apk href="#install">Download for Android</a>
 </div></section>
 </main>
 
