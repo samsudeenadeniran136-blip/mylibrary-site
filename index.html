@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mylibrary: study guides, flashcards and tests from your own PDFs</title>
+<style>
+:root{--bg:#fffdf9;--surface:#f5eee3;--ink:#2b1a0f;--muted:#6f5638;--line:#dccdb4;--accent:#8a5a0c;--on-accent:#fffdf9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;color-scheme:dark}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:680px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.15;margin:0}
+h1{font-size:clamp(2.1rem,8vw,3.2rem);letter-spacing:-.01em}
+h2{font-size:1.75rem;margin-bottom:14px}
+h3{font-size:1.15rem}
+p{margin:0 0 12px}
+a{color:inherit}
+section{padding:44px 0;border-top:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+.mark{font-family:Georgia,serif;font-weight:700;font-size:1.25rem;text-decoration:none}
+nav{display:flex;gap:18px;align-items:center;font-size:.95rem}
+nav a{text-decoration:none;color:var(--muted)}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:15px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem}
+nav .btn{padding:9px 16px;font-size:.95rem;color:var(--on-accent)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.hero{padding:30px 0 40px;border-top:0}
+.hero p.lead{font-size:1.15rem;color:var(--muted);margin:16px 0 24px;max-width:34em}
+.fine{font-size:.9rem;color:var(--muted);margin-top:12px}
+.shelf{display:flex;align-items:flex-end;gap:6px;margin-top:40px;padding:0 6px;border-bottom:10px solid var(--line);min-height:210px}
+.shelf b{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;color:#f5e9d0;font:600 .8rem/1 Georgia,serif;letter-spacing:.03em;border-radius:3px 3px 0 0;box-shadow:inset -4px 0 0 rgba(0,0,0,.18)}
+.shelf .lean{transform:rotate(7deg);transform-origin:bottom left;margin-left:10px}
+.shelf-note{font-size:.9rem;color:var(--muted);margin-top:10px}
+dl{margin:0}
+dt{font-weight:700;margin-top:18px}
+dd{margin:2px 0 0;color:var(--muted)}
+ol.steps{padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;padding-left:46px;position:relative;margin-bottom:16px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-weight:700;text-align:center;line-height:32px}
+.warn{background:var(--surface);border-left:4px solid var(--accent);padding:14px 16px;margin-top:22px}
+.photo{margin-top:12px;border:2px dashed var(--line);padding:26px 14px;text-align:center;color:var(--muted);font-size:.9rem}
+ul.rows{list-style:none;margin:18px 0 0;padding:0}
+ul.rows li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:16px 0;border-top:1px solid var(--line)}
+ul.rows li:last-child{border-bottom:1px solid var(--line)}
+ul.rows p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.price{font:700 1.5rem Georgia,serif;white-space:nowrap}
+ul.rows li.best{border-left:4px solid var(--accent);padding-left:14px;background:var(--surface)}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin:10px 0 0;color:var(--muted)}
+footer{padding:30px 0 40px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer a{margin-right:16px;display:inline-block;margin-bottom:6px}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <a class="mark" href="#top">Mylibrary</a>
+  <nav><a href="#install">Install</a><a href="#prices">Prices</a><a href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="w">
+  <h1>Turn your PDFs into study guides, flashcards and tests</h1>
+  <p class="lead">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
+  <a class="btn" data-apk href="#install">Download for Android</a>
+  <p class="fine">Android only. Free to start.<span data-site="meta"></span></p>
+  <div class="shelf" aria-hidden="true">
+    <b style="height:170px;width:44px;background:#7a4a2b">Pharmacology</b>
+    <b style="height:205px;width:50px;background:#3f5f4a">Organic Chemistry</b>
+    <b style="height:150px;width:40px;background:#8a6a1f">Statistics</b>
+    <b class="lean" style="height:190px;width:48px;background:#7a2f3a">Anatomy</b>
+    <b style="height:178px;width:44px;background:#4a4f7a">Economics</b>
+    <b style="height:160px;width:42px;background:#5b4636">Law of Contract</b>
+  </div>
+  <p class="shelf-note">Your courses live on a shelf, by semester, with every file inside.</p>
+</div></section>
+
+<section><div class="w">
+  <h2>What Mylibrary does</h2>
+  <dl>
+    <dt>Add any file</dt><dd>PDF, Word, PowerPoint, text files and pictures, kept by course and semester.</dd>
+    <dt>Study guides</dt><dd>Your file sorted by topic, in short, simple sentences.</dd>
+    <dt>Flashcards</dt><dd>Made from the guide. Cards you know come back later. Cards you miss come back today.</dd>
+    <dt>Tests</dt><dd>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</dd>
+    <dt>Ask and dictionary</dt><dd>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</dd>
+  </dl>
+</div></section>
+
+<section id="install"><div class="w">
+  <h2>Install in three steps</h2>
+  <ol class="steps">
+    <li><b>Tap Download for Android.</b><br>The file saves to your phone.</li>
+    <li><b>Open the file.</b><br>If your phone asks, allow installs from your browser.</li>
+    <li><b>Open Mylibrary.</b><br>Make your account, choose your level and add your first PDF.</li>
+  </ol>
+  <a class="btn" data-apk href="#install">Download for Android</a>
+  <div class="warn">
+    <b>Your phone may show a warning.</b>
+    <p>That happens with any app that doesn’t come from Google Play. Download Mylibrary only from this page, and check the web address first.</p>
+    <div class="photo">Photo of the warning screen goes here</div>
+  </div>
+</div></section>
+
+<section id="prices"><div class="w">
+  <h2>Prices</h2>
+  <p>Every paid plan lets you build guides and flashcards from 120 pages a week, take one 20-question test a week, and ask 25 questions a week. Reading and reviewing what you already made is always free.</p>
+  <ul class="rows">
+    <li><div><h3>Free</h3><p>5 courses, 10 questions a week on short files, 2 tests a month. No guides or flashcards.</p></div><span class="price">₦0</span></li>
+    <li><div><h3>1 week</h3><p>Made for exam week: guides from 200 pages and 30 questions.</p></div><span class="price">₦865</span></li>
+    <li><div><h3>1 month</h3><p>About ₦693 a week.</p></div><span class="price">₦3,000</span></li>
+    <li><div><h3>3 months</h3><p>About ₦615 a week.</p></div><span class="price">₦8,000</span></li>
+    <li class="best"><div><h3>1 year</h3><p>About ₦519 a week. Lowest price per week.</p></div><span class="price">₦27,000</span></li>
+  </ul>
+  <p class="fine" style="margin-top:16px">You pay inside the app with Paystack. Used up your week? Buy a small pack of extra pages or tests, also inside the app.</p>
+</div></section>
+
+<section id="faq"><div class="w">
+  <h2>Questions</h2>
+  <details><summary>Is it safe to install?</summary><p>Your phone warns about any app that doesn’t come from Google Play. Download only from this page and check the web address first.</p></details>
+  <details><summary>Do I need internet?</summary><p>Building guides, flashcards and tests, and asking questions, need internet. Guides and flashcards you already built stay on your phone.</p></details>
+  <details><summary>What if I run out for the week?</summary><p>Reading and reviewing never run out. For new guides or tests, wait for next week or buy a small pack inside the app.</p></details>
+  <details><summary>How do I pay?</summary><p>Inside the app, with Paystack. Your plan starts once the payment is confirmed.</p></details>
+  <details><summary>Can I get a refund?</summary><p>The refund rules will be on the Refund policy page before launch.</p></details>
+  <details><summary>Which phones work?</summary><p>Android phones only, for now.</p></details>
+</div></section>
+</main>
+
+<footer><div class="w">
+  <a href="#privacy" title="Add the privacy policy page">Privacy policy</a><a href="#terms" title="Add the terms page">Terms of use</a><a href="#refunds" title="Add the refund page">Refund policy</a><a data-wa href="#" hidden>Support on WhatsApp</a>
+  <p>© Mylibrary</p>
+</div></footer>
+
+<script>
+/* Edit these when you have them. Empty values stay hidden. */
+var SITE={apkUrl:"",version:"",size:"",whatsapp:""};
+document.querySelectorAll("[data-apk]").forEach(function(a){if(SITE.apkUrl)a.href=SITE.apkUrl});
+var m=[];if(SITE.version)m.push("Version "+SITE.version);if(SITE.size)m.push(SITE.size);
+var el=document.querySelector("[data-site=meta]");if(el&&m.length)el.textContent=" "+m.join(", ")+".";
+var wa=document.querySelector("[data-wa]");if(wa&&SITE.whatsapp){wa.href="https://wa.me/"+SITE.whatsapp;wa.hidden=false}
+</script>
+</body>
+</html>
