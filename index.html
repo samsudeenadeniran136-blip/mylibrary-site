@@ -4,100 +4,135 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mylibrary: study guides, flashcards and tests from your own PDFs</title>
+<meta name="description" content="Drop in your PDFs. Mylibrary builds study guides, flashcards and tests from your own pages.">
 <style>
-:root{--bg:#fffdf9;--surface:#f5eee3;--ink:#2b1a0f;--muted:#6f5638;--line:#dccdb4;--accent:#8a5a0c;--on-accent:#fffdf9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;color-scheme:dark}
-html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+:root{--bg:#fffdf9;--surface:#f5eee3;--ink:#2b1a0f;--muted:#6f5638;--line:#dccdb4;--accent:#8a5a0c;--on-accent:#fffdf9;--deep:#2b1a0f;--deep-ink:#f5e9d0;--gold:#d9a441;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#24150b;--surface:#2f1d10;--ink:#f5e9d0;--muted:#c3a982;--line:#5a3d24;--accent:#d9a441;--on-accent:#2b1a0f;--deep:#1a0f07;color-scheme:dark}
+html{background:var(--bg);scroll-padding-top:70px;scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.w{max-width:680px;margin:0 auto;padding:0 20px}
-h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.15;margin:0}
-h1{font-size:clamp(2.1rem,8vw,3.2rem);letter-spacing:-.01em}
-h2{font-size:1.75rem;margin-bottom:14px}
-h3{font-size:1.15rem}
+.w{max-width:1000px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.mark,.price{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;line-height:1.1;margin:0}
+h1{font-size:clamp(2.4rem,9vw,4.2rem);letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(1.8rem,6vw,2.6rem);margin-bottom:20px;font-weight:700}
+h3{font-size:1.2rem}
 p{margin:0 0 12px}
 a{color:inherit}
-section{padding:44px 0;border-top:1px solid var(--line)}
-header .w{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
-.mark{font-family:Georgia,serif;font-weight:700;font-size:1.25rem;text-decoration:none}
-nav{display:flex;gap:18px;align-items:center;font-size:.95rem}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:16px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem;box-shadow:0 5px 0 rgba(0,0,0,.25);transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible,.card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
+.mark{font-weight:700;font-size:1.35rem;text-decoration:none}
+nav{display:flex;gap:16px;align-items:center;font-size:.95rem}
 nav a{text-decoration:none;color:var(--muted)}
-.btn{display:inline-block;background:var(--accent);color:var(--on-accent);padding:15px 26px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem}
-nav .btn{padding:9px 16px;font-size:.95rem;color:var(--on-accent)}
-.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.hero{padding:30px 0 40px;border-top:0}
-.hero p.lead{font-size:1.15rem;color:var(--muted);margin:16px 0 24px;max-width:34em}
-.fine{font-size:.9rem;color:var(--muted);margin-top:12px}
-.shelf{display:flex;align-items:flex-end;gap:6px;margin-top:40px;padding:0 6px;border-bottom:10px solid var(--line);min-height:210px}
-.shelf b{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;color:#f5e9d0;font:600 .8rem/1 Georgia,serif;letter-spacing:.03em;border-radius:3px 3px 0 0;box-shadow:inset -4px 0 0 rgba(0,0,0,.18)}
-.shelf .lean{transform:rotate(7deg);transform-origin:bottom left;margin-left:10px}
-.shelf-note{font-size:.9rem;color:var(--muted);margin-top:10px}
-dl{margin:0}
-dt{font-weight:700;margin-top:18px}
-dd{margin:2px 0 0;color:var(--muted)}
-ol.steps{padding-left:0;list-style:none;counter-reset:s}
-ol.steps li{counter-increment:s;padding-left:46px;position:relative;margin-bottom:16px}
-ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-weight:700;text-align:center;line-height:32px}
-.warn{background:var(--surface);border-left:4px solid var(--accent);padding:14px 16px;margin-top:22px}
-.photo{margin-top:12px;border:2px dashed var(--line);padding:26px 14px;text-align:center;color:var(--muted);font-size:.9rem}
-ul.rows{list-style:none;margin:18px 0 0;padding:0}
-ul.rows li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:16px 0;border-top:1px solid var(--line)}
-ul.rows li:last-child{border-bottom:1px solid var(--line)}
-ul.rows p{margin:2px 0 0;color:var(--muted);font-size:.95rem}
-.price{font:700 1.5rem Georgia,serif;white-space:nowrap}
-ul.rows li.best{border-left:4px solid var(--accent);padding-left:14px;background:var(--surface)}
-details{border-top:1px solid var(--line);padding:14px 0}
-details:last-of-type{border-bottom:1px solid var(--line)}
+nav .btn{padding:9px 16px;font-size:.95rem;color:var(--on-accent);box-shadow:none}
+.nl{display:none}
+@media(min-width:640px){.nl{display:inline}}
+.hero{background:var(--surface);padding:40px 0 0;overflow:hidden}
+.hero .lead{font-size:1.2rem;color:var(--muted);margin:18px 0 26px;max-width:32em}
+.fine{font-size:.9rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chip{border:1.5px solid var(--line);background:var(--bg);border-radius:99px;padding:8px 15px;font-weight:700;font-size:.92rem;text-decoration:none}
+.chip b{color:var(--accent)}
+.stage{display:grid;gap:26px;align-items:end}
+@media(min-width:820px){.stage{grid-template-columns:1.05fr .95fr;gap:40px}}
+.shelf{display:flex;align-items:flex-end;gap:7px;padding:0 10px;border-bottom:14px solid var(--accent);min-height:280px;margin-top:10px;position:relative}
+.shelf b{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;color:#f5e9d0;font:700 .85rem/1 Georgia,serif;letter-spacing:.03em;border-radius:4px 4px 0 0;box-shadow:inset -5px 0 0 rgba(0,0,0,.2);flex:1;max-width:56px}
+.shelf .lean{transform:rotate(8deg);transform-origin:bottom left;margin-left:12px}
+.card{position:absolute;right:4px;bottom:42px;width:min(58%,240px);height:140px;perspective:700px;cursor:pointer;border:0;background:none;padding:0;font:inherit;transform:rotate(-4deg)}
+.card i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;border-radius:14px;font:700 1.05rem/1.2 Georgia,serif;backface-visibility:hidden;transition:transform .5s;box-shadow:0 12px 28px rgba(43,26,15,.35)}
+.card .f{background:var(--bg);color:var(--ink);border:2px solid var(--accent)}
+.card .k{background:var(--accent);color:var(--on-accent);transform:rotateY(180deg)}
+.card.on .f{transform:rotateY(180deg)}.card.on .k{transform:rotateY(360deg)}
+.hint{font-size:.85rem;color:var(--muted);margin:10px 0 28px}
+.band{padding:60px 0}
+.tiles{display:grid;gap:14px}
+@media(min-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}.tile.wide{grid-column:1/-1}}
+@media(min-width:900px){.tiles{grid-template-columns:repeat(3,1fr)}.tile.wide{grid-column:auto}}
+.tile{background:var(--surface);border-radius:20px;padding:22px;border-top:6px solid var(--accent)}
+.tile p{margin:8px 0 0;color:var(--muted)}
+.deep{background:var(--deep);color:var(--deep-ink)}
+.deep h2{color:var(--deep-ink)}
+ol.steps{padding:0;margin:0 0 26px;list-style:none;counter-reset:s;display:grid;gap:14px}
+@media(min-width:760px){ol.steps{grid-template-columns:repeat(3,1fr)}}
+ol.steps li{counter-increment:s;background:#ffffff12;border-radius:18px;padding:20px 20px 20px 70px;position:relative}
+ol.steps li::before{content:counter(s);position:absolute;left:18px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#2b1a0f;font:700 1.15rem/38px Georgia,serif;text-align:center}
+ol.steps span{color:#c3a982}
+.deep .btn{background:var(--gold);color:#2b1a0f}
+.warn{background:#ffffff12;border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:16px 18px;margin-top:24px}
+.warn p{color:#c3a982}
+.photo{margin-top:12px;border:2px dashed #5a3d24;border-radius:12px;padding:26px 14px;text-align:center;color:#c3a982;font-size:.9rem}
+.plans{display:grid;gap:12px;margin-top:20px;grid-template-columns:1fr}
+@media(min-width:640px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.plans{grid-template-columns:repeat(5,1fr)}}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:18px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.plan p{color:var(--muted);font-size:.93rem;margin:4px 0 0}
+.price{font-weight:700;font-size:1.7rem;white-space:nowrap}
+@media(min-width:960px){.plan{flex-direction:column;align-items:flex-start;justify-content:flex-start}.price{margin-top:auto;padding-top:12px}}
+.plan.best{background:var(--accent);color:var(--on-accent);border-color:var(--accent);position:relative}
+.plan.best p{color:inherit;opacity:.9}
+.plan.best::before{content:"Best value";position:absolute;top:-12px;right:16px;background:var(--deep);color:var(--gold);font-weight:700;font-size:.78rem;padding:4px 12px;border-radius:99px}
+.faq{background:var(--surface)}
+details{background:var(--bg);border-radius:14px;padding:15px 18px;margin-bottom:10px}
 summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1}
+summary::after{content:"+";color:var(--accent);font-size:1.4rem;line-height:1}
 details[open] summary::after{content:"\2212"}
 details p{margin:10px 0 0;color:var(--muted)}
-footer{padding:30px 0 40px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
-footer a{margin-right:16px;display:inline-block;margin-bottom:6px}
+@media(min-width:900px){.faq .w{display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start}}
+footer{background:var(--deep);color:#c3a982;padding:32px 0 42px;font-size:.95rem}
+footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <header><div class="w">
   <a class="mark" href="#top">Mylibrary</a>
-  <nav><a href="#install">Install</a><a href="#prices">Prices</a><a href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
+  <nav><a class="nl" href="#install">Install</a><a href="#prices">Prices</a><a class="nl" href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
 </div></header>
 
 <main id="top">
-<section class="hero"><div class="w">
-  <h1>Turn your PDFs into study guides, flashcards and tests</h1>
-  <p class="lead">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
-  <a class="btn" data-apk href="#install">Download for Android</a>
-  <p class="fine">Android only. Free to start.<span data-site="meta"></span></p>
-  <div class="shelf" aria-hidden="true">
-    <b style="height:170px;width:44px;background:#7a4a2b">Pharmacology</b>
-    <b style="height:205px;width:50px;background:#3f5f4a">Organic Chemistry</b>
-    <b style="height:150px;width:40px;background:#8a6a1f">Statistics</b>
-    <b class="lean" style="height:190px;width:48px;background:#7a2f3a">Anatomy</b>
-    <b style="height:178px;width:44px;background:#4a4f7a">Economics</b>
-    <b style="height:160px;width:42px;background:#5b4636">Law of Contract</b>
+<section class="hero"><div class="w"><div class="stage">
+  <div>
+    <h1>Turn your PDFs into study guides, flashcards and tests</h1>
+    <p class="lead">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
+    <a class="btn" data-apk href="#install">Download for Android</a>
+    <p class="fine" style="margin-top:14px">Android only. Free to start.<span data-site="meta"></span></p>
+    <div class="chips"><a class="chip" href="#prices">Free <b>₦0</b></a><a class="chip" href="#prices">From <b>₦865</b> a week</a><a class="chip" href="#prices">See all prices</a></div>
   </div>
-  <p class="shelf-note">Your courses live on a shelf, by semester, with every file inside.</p>
-</div></section>
+  <div>
+    <div class="shelf">
+      <b style="height:190px;background:#7a4a2b">Pharmacology</b>
+      <b style="height:245px;background:#3f5f4a">Organic Chemistry</b>
+      <b style="height:165px;background:#8a6a1f">Statistics</b>
+      <b class="lean" style="height:220px;background:#7a2f3a">Anatomy</b>
+      <b style="height:200px;background:#4a4f7a">Economics</b>
+      <b style="height:180px;background:#5b4636">Law of Contract</b>
+      <button class="card" type="button" aria-label="Sample flashcard. Tap to flip." onclick="this.classList.toggle('on')"><i class="f">Which organelle makes ATP?</i><i class="k">The mitochondrion</i></button>
+    </div>
+    <p class="hint">Tap the card. Your courses live on a shelf, by semester, with every file inside.</p>
+  </div>
+</div></div></section>
 
-<section><div class="w">
+<section class="band"><div class="w">
   <h2>What Mylibrary does</h2>
-  <dl>
-    <dt>Add any file</dt><dd>PDF, Word, PowerPoint, text files and pictures, kept by course and semester.</dd>
-    <dt>Study guides</dt><dd>Your file sorted by topic, in short, simple sentences.</dd>
-    <dt>Flashcards</dt><dd>Made from the guide. Cards you know come back later. Cards you miss come back today.</dd>
-    <dt>Tests</dt><dd>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</dd>
-    <dt>Ask and dictionary</dt><dd>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</dd>
-  </dl>
+  <div class="tiles">
+    <div class="tile wide"><h3>Add any file</h3><p>PDF, Word, PowerPoint, text files and pictures, kept by course and semester.</p></div>
+    <div class="tile"><h3>Study guides</h3><p>Your file sorted by topic, in short, simple sentences.</p></div>
+    <div class="tile"><h3>Flashcards</h3><p>Made from the guide. Cards you know come back later. Cards you miss come back today.</p></div>
+    <div class="tile"><h3>Tests</h3><p>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</p></div>
+    <div class="tile wide"><h3>Ask and dictionary</h3><p>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</p></div>
+  </div>
 </div></section>
 
-<section id="install"><div class="w">
+<section id="install" class="band deep"><div class="w">
   <h2>Install in three steps</h2>
   <ol class="steps">
-    <li><b>Tap Download for Android.</b><br>The file saves to your phone.</li>
-    <li><b>Open the file.</b><br>If your phone asks, allow installs from your browser.</li>
-    <li><b>Open Mylibrary.</b><br>Make your account, choose your level and add your first PDF.</li>
+    <li><b>Tap Download for Android.</b><br><span>The file saves to your phone.</span></li>
+    <li><b>Open the file.</b><br><span>If your phone asks, allow installs from your browser.</span></li>
+    <li><b>Open Mylibrary.</b><br><span>Make your account, choose your level and add your first PDF.</span></li>
   </ol>
   <a class="btn" data-apk href="#install">Download for Android</a>
   <div class="warn">
@@ -107,27 +142,29 @@ footer a{margin-right:16px;display:inline-block;margin-bottom:6px}
   </div>
 </div></section>
 
-<section id="prices"><div class="w">
+<section id="prices" class="band"><div class="w">
   <h2>Prices</h2>
   <p>Every paid plan lets you build guides and flashcards from 120 pages a week, take one 20-question test a week, and ask 25 questions a week. Reading and reviewing what you already made is always free.</p>
-  <ul class="rows">
-    <li><div><h3>Free</h3><p>5 courses, 10 questions a week on short files, 2 tests a month. No guides or flashcards.</p></div><span class="price">₦0</span></li>
-    <li><div><h3>1 week</h3><p>Made for exam week: guides from 200 pages and 30 questions.</p></div><span class="price">₦865</span></li>
-    <li><div><h3>1 month</h3><p>About ₦693 a week.</p></div><span class="price">₦3,000</span></li>
-    <li><div><h3>3 months</h3><p>About ₦615 a week.</p></div><span class="price">₦8,000</span></li>
-    <li class="best"><div><h3>1 year</h3><p>About ₦519 a week. Lowest price per week.</p></div><span class="price">₦27,000</span></li>
-  </ul>
+  <div class="plans">
+    <div class="plan"><div><h3>Free</h3><p>5 courses, 10 questions a week on short files, 2 tests a month. No guides or flashcards.</p></div><span class="price">₦0</span></div>
+    <div class="plan"><div><h3>1 week</h3><p>Made for exam week: guides from 200 pages and 30 questions.</p></div><span class="price">₦865</span></div>
+    <div class="plan"><div><h3>1 month</h3><p>About ₦693 a week.</p></div><span class="price">₦3,000</span></div>
+    <div class="plan"><div><h3>3 months</h3><p>About ₦615 a week.</p></div><span class="price">₦8,000</span></div>
+    <div class="plan best"><div><h3>1 year</h3><p>About ₦519 a week. Lowest price per week.</p></div><span class="price">₦27,000</span></div>
+  </div>
   <p class="fine" style="margin-top:16px">You pay inside the app with Paystack. Used up your week? Buy a small pack of extra pages or tests, also inside the app.</p>
 </div></section>
 
-<section id="faq"><div class="w">
+<section id="faq" class="band faq"><div class="w">
   <h2>Questions</h2>
+  <div>
   <details><summary>Is it safe to install?</summary><p>Your phone warns about any app that doesn’t come from Google Play. Download only from this page and check the web address first.</p></details>
   <details><summary>Do I need internet?</summary><p>Building guides, flashcards and tests, and asking questions, need internet. Guides and flashcards you already built stay on your phone.</p></details>
   <details><summary>What if I run out for the week?</summary><p>Reading and reviewing never run out. For new guides or tests, wait for next week or buy a small pack inside the app.</p></details>
   <details><summary>How do I pay?</summary><p>Inside the app, with Paystack. Your plan starts once the payment is confirmed.</p></details>
   <details><summary>Can I get a refund?</summary><p>The refund rules will be on the Refund policy page before launch.</p></details>
   <details><summary>Which phones work?</summary><p>Android phones only, for now.</p></details>
+  </div>
 </div></section>
 </main>
 
