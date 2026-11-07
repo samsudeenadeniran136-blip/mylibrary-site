@@ -27,10 +27,12 @@ a{color:inherit}
 .btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 header .w{display:flex;align-items:center;justify-content:space-between;padding-top:11px;padding-bottom:11px}
-.mark{font-weight:800;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em}
+.mark{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:clamp(1.3rem,5.4vw,1.8rem);line-height:1;text-decoration:none;letter-spacing:-.035em;-webkit-text-stroke:.035em currentColor;color:var(--ink)}
+.mark svg{width:1.05em;height:1.2em;flex:none}
 nav{display:flex;gap:18px;align-items:center;font-size:.95rem;font-weight:700}
 nav a{text-decoration:none;color:var(--muted)}
 nav .btn{padding:9px 16px;font-size:.92rem;color:var(--on-accent);box-shadow:none;border-radius:10px}
+@media(max-width:420px){nav{gap:12px}nav .btn{padding:8px 12px}}
 .nl{display:none}
 @media(min-width:700px){.nl{display:inline}}
 .hero{background:radial-gradient(circle at 80% 20%,rgba(217,164,65,.35),transparent 50%),var(--surface);padding:44px 0 56px}
@@ -118,7 +120,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 </head>
 <body>
 <header><div class="w">
-  <a class="mark" href="#top">Mylibrary</a>
+  <a class="mark" href="#top" aria-label="Mylibrary home"><svg viewBox="0 0 30 34" aria-hidden="true"><rect x="1" y="1" width="28" height="9" rx="2.5" fill="#8f3a3a"/><rect x="3" y="12" width="26" height="9" rx="2.5" fill="#2f6b4f"/><rect x="0" y="23" width="30" height="9" rx="2.5" fill="#b07d12"/><rect x="5" y="4.5" width="20" height="1.8" fill="#f0d278"/><rect x="7" y="15.5" width="16" height="1.8" fill="#f0d278"/><rect x="4" y="26.5" width="22" height="1.8" fill="#f0d278"/></svg><span>Mylibrary</span></a>
   <nav><a class="nl" href="#features">Features</a><a href="#prices">Prices</a><a class="nl" href="#faq">Questions</a><a class="btn" data-apk href="#install">Download</a></nav>
 </div></header>
 
@@ -199,6 +201,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
   <details><summary>How do I pay?</summary><p>Inside the app, with Paystack. Your plan starts once the payment is confirmed.</p></details>
   <details><summary>Can I get a refund?</summary><p>Yes, in some cases, such as a payment that did not activate your plan or a double charge. Read the <a href="refund.html">Refund policy</a>.</p></details>
   <details><summary>Which phones work?</summary><p>Android phones only, for now.</p></details>
+  <details><summary>How do I contact you?</summary><p>Email <a href="mailto:Mylibrary.ap@gmail.com">Mylibrary.ap@gmail.com</a>. You can also message us on WhatsApp from the link at the bottom of this page.</p></details>
   </div>
 </div></section>
 
@@ -210,7 +213,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 </main>
 
 <footer><div class="w">
-  <a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of use</a><a href="refund.html">Refund policy</a><a data-wa href="#" hidden>Support on WhatsApp</a>
+  <a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of use</a><a href="refund.html">Refund policy</a><a data-wa href="#" hidden>Support on WhatsApp</a><a href="mailto:Mylibrary.ap@gmail.com">Mylibrary.ap@gmail.com</a>
   <p>© Mylibrary</p>
 </div></footer>
 
