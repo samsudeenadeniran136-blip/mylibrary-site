@@ -103,6 +103,13 @@ ol.steps span{color:#c3a982}
 .plan.best{background:var(--accent);color:var(--on-accent);border-color:var(--accent);position:relative}
 .plan.best p{color:inherit;opacity:.92}
 .plan.best::before{content:"Best value";position:absolute;top:-12px;right:16px;background:var(--deep);color:var(--gold);font-weight:800;font-size:.75rem;padding:4px 12px;border-radius:99px}
+.packs{display:grid;gap:12px;margin-top:26px}
+@media(min-width:760px){.packs{grid-template-columns:1fr 1fr}}
+.pack{background:var(--surface);border:2px solid var(--line);border-radius:22px;padding:20px}
+.pack ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.pack li{display:flex;justify-content:space-between;gap:12px;font-weight:700}
+.pack li span:last-child{white-space:nowrap}
+.pack p{color:var(--muted);font-size:.9rem;margin:6px 0 0}
 .faq{background:var(--surface)}
 details{background:var(--bg);border-radius:16px;padding:16px 18px;margin-bottom:10px}
 summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
@@ -131,7 +138,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
     <p class="sub">Add a course, drop in your notes, and Mylibrary builds study material from your own pages. Answers come from your files. Only word meanings come from outside.</p>
     <a class="btn" data-apk href="#install">Download for Android</a>
     <p class="fine" style="margin-top:14px">Free to start.<span data-site="meta"></span></p>
-    <div class="proof"><span>PDF, Word, PowerPoint</span><span>From ₦865 a week</span><span>Pay in the app</span></div>
+    <div class="proof"><span>PDF, Word, PowerPoint</span><span>From ₦1,000 a week</span><span>Pay in the app</span></div>
   </div>
   <div>
     <div class="phone"><div class="screen">
@@ -153,7 +160,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
       <div class="mini"><span class="h">Cell membrane</span><span class="t">It controls what enters and leaves the cell. It is made of two layers of fat.</span></div></div>
     <div class="feat"><h3>Flashcards</h3><p>Made from the guide. Cards you know come back later. Cards you miss come back today.</p>
       <div class="mini"><span><span class="pill">Know it</span>back in 5 days</span><span><span class="pill">Missed</span>back today</span></div></div>
-    <div class="feat"><h3>Tests</h3><p>20 to 50 questions from the pages you have read, with an explanation for each one you miss.</p>
+    <div class="feat"><h3>Tests</h3><p>Choose how many objective and theory questions you want, up to 60. Every question comes from your own pages, with an explanation. Every new test asks new questions, and you can read your past tests again, even without internet.</p>
       <div class="mini"><span class="h">Which organelle makes ATP?</span><span class="opt no">Nucleus</span><span class="opt ok">Mitochondrion</span><span class="opt">Ribosome</span></div></div>
     <div class="feat"><h3>Ask and dictionary</h3><p>Ask about any page by typing or speaking. Look up any word, even if your PDF never explains it.</p>
       <div class="mini"><span class="say me">What does “efflux” mean?</span><span class="say ai">It means flowing out of a cell.</span></div></div>
@@ -181,24 +188,36 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 
 <section id="prices" class="band"><div class="w">
   <h2>Simple prices</h2>
-  <p class="sub">Every paid plan lets you build guides and flashcards from 120 pages a week, take one 20-question test a week, and ask 25 questions a week. Reading and reviewing what you already made is always free.</p>
+  <p class="sub">Every Premium plan has the same weekly limits: study guides from 100 pages a week, 15 flashcard builds, 5 tests and 10 questions a week. Reading and reviewing what you already made is always free.</p>
   <div class="plans">
-    <div class="plan"><div><h3>Free</h3><p>5 courses, 10 questions a week on short files, 2 tests a month. No guides or flashcards.</p></div><span class="price">₦0</span></div>
-    <div class="plan"><div><h3>1 week</h3><p>Made for exam week: guides from 200 pages and 30 questions.</p></div><span class="price">₦865</span></div>
-    <div class="plan"><div><h3>1 month</h3><p>About ₦693 a week.</p></div><span class="price">₦3,000</span></div>
-    <div class="plan"><div><h3>3 months</h3><p>About ₦615 a week.</p></div><span class="price">₦8,000</span></div>
-    <div class="plan best"><div><h3>1 year</h3><p>About ₦519 a week. Lowest price per week.</p></div><span class="price">₦27,000</span></div>
+    <div class="plan"><div><h3>Free</h3><p>5 courses, 5 questions a week on short files, 1 test a month. No flashcards. Study guides only with extra pages (see below).</p></div><span class="price">₦0</span></div>
+    <div class="plan"><div><h3>1 week</h3><p>Made for exam week. Renews every week until you stop it.</p></div><span class="price">₦1,000</span></div>
+    <div class="plan"><div><h3>1 month</h3><p>About ₦808 a week. Renews every month.</p></div><span class="price">₦3,500</span></div>
+    <div class="plan"><div><h3>3 months</h3><p>About ₦731 a week. Renews every 3 months.</p></div><span class="price">₦9,500</span></div>
+    <div class="plan best"><div><h3>1 year</h3><p>About ₦692 a week. Lowest price per week. Renews every year.</p></div><span class="price">₦36,000</span></div>
   </div>
-  <p class="fine" style="margin-top:16px">You pay inside the app with Paystack. Used up your week? Buy a small pack of extra pages or tests, also inside the app.</p>
+  <p class="fine" style="margin-top:16px">You pay inside the app with Paystack, by card. A Premium plan renews by itself until you stop it. In the app, open the Premium page and tap Stop renewing. You keep Premium until the end of the time you paid for.</p>
+
+  <h2 style="margin-top:44px">Used up your week? Buy extras.</h2>
+  <p class="sub">Free and Premium students can both buy. One payment, no renewing, and they never expire. They are used after your weekly pages and tests.</p>
+  <div class="packs">
+    <div class="pack"><h3>Extra guide pages</h3>
+      <ul><li><span>300 pages</span><span>₦1,260</span></li><li><span>600 pages</span><span>₦2,300</span></li><li><span>1000 pages</span><span>₦3,500</span></li></ul>
+      <p>Extra pages open the study guide only. Flashcards are for Premium.</p></div>
+    <div class="pack"><h3>Extra tests</h3>
+      <ul><li><span>5 tests</span><span>₦500</span></li><li><span>10 tests</span><span>₦900</span></li><li><span>20 tests</span><span>₦1,600</span></li></ul>
+      <p>You can pay by card, bank transfer or USSD.</p></div>
+  </div>
 </div></section>
 
 <section id="faq" class="band faq"><div class="w">
   <h2>Questions</h2>
   <div>
   <details><summary>Is it safe to install?</summary><p>Your phone warns about any app that doesn’t come from Google Play. Download only from this page and check the web address first.</p></details>
-  <details><summary>Do I need internet?</summary><p>Building guides, flashcards and tests, and asking questions, need internet. Guides and flashcards you already built stay on your phone.</p></details>
-  <details><summary>What if I run out for the week?</summary><p>Reading and reviewing never run out. For new guides or tests, wait for next week or buy a small pack inside the app.</p></details>
-  <details><summary>How do I pay?</summary><p>Inside the app, with Paystack. Your plan starts once the payment is confirmed.</p></details>
+  <details><summary>Do I need internet?</summary><p>Building guides, flashcards and tests, and asking questions, need internet. Guides and flashcards you already built, and your past tests, stay on your phone.</p></details>
+  <details><summary>What if I run out for the week?</summary><p>Reading and reviewing never run out. For new guides or tests, wait for next week or buy extra pages or tests inside the app.</p></details>
+  <details><summary>How do I pay?</summary><p>Inside the app, with Paystack. Premium plans are paid by card. Extra pages and tests can also be paid by bank transfer or USSD. Your plan or pack starts once the payment is confirmed.</p></details>
+  <details><summary>Does my plan renew by itself?</summary><p>Yes. A Premium plan renews with the same card when its time ends, until you stop it. To stop, open the app, go to the Premium page and tap Stop renewing. You keep Premium until the end of the time you already paid for. Extra pages and tests never renew.</p></details>
   <details><summary>Can I get a refund?</summary><p>Yes, in some cases, such as a payment that did not activate your plan or a double charge. Read the <a href="refund.html">Refund policy</a>.</p></details>
   <details><summary>Which phones work?</summary><p>Android phones only, for now.</p></details>
   <details><summary>How do I contact you?</summary><p>Email <a href="mailto:Mylibrary.ap@gmail.com">Mylibrary.ap@gmail.com</a>. You can also message us on WhatsApp from the link at the bottom of this page.</p></details>
@@ -219,7 +238,7 @@ footer a{margin-right:18px;display:inline-block;margin-bottom:6px}
 
 <script>
 /* Edit these when you have them. Empty values stay hidden. */
-var SITE={repo:"samsudeenadeniran136-blip/mylibrary-site",file:"mylibrary.apk",apkUrl:"",version:"",size:"",whatsapp:"2349043768735"};
+var SITE={repo:"samsudeenadeniran136-blip/mylibrary-site",file:"mylibrary.apk",apkUrl:"",version:"",size:"",whatsapp:"2349132905535"};
 /* repo = "your-github-username/mylibrary-releases". With it set, the link, version and size update by themselves. */
 function apply(){document.querySelectorAll("[data-apk]").forEach(function(a){if(SITE.apkUrl)a.href=SITE.apkUrl});
 var m=[];if(SITE.version)m.push("Version "+SITE.version);if(SITE.size)m.push(SITE.size);
